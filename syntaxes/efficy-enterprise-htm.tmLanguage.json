@@ -1,0 +1,116 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Efficy Enterprise HTM",
+  "scopeName": "text.html.efficy-enterprise-htm",
+  "fileTypes": ["htm"],
+  "patterns": [
+    { "include": "#efficy-tag-close" },
+    { "include": "#efficy-tag-open" },
+    { "include": "#efficy-inner-tag" },
+    { "include": "text.html.basic" }
+  ],
+  "repository": {
+    "efficy-tag-close": {
+      "name": "meta.tag.efficy.close.htm",
+      "begin": "(<%)(/)([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.efficy" },
+        "2": { "name": "punctuation.definition.tag.close.efficy" },
+        "3": { "name": "entity.name.tag.efficy" }
+      },
+      "end": "(%>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.efficy" }
+      }
+    },
+    "efficy-tag-open": {
+      "name": "meta.tag.efficy.htm",
+      "begin": "(<%)([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.efficy" },
+        "2": { "name": "entity.name.tag.efficy support.function.efficy" }
+      },
+      "end": "(%>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.efficy" }
+      },
+      "patterns": [
+        { "include": "#tag-args" }
+      ]
+    },
+    "efficy-inner-tag": {
+      "comment": "%%FuncName(...) — inner tag evaluation inside string arguments.",
+      "name": "meta.tag.efficy.inner.htm",
+      "begin": "(%%)([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.inner.efficy" },
+        "2": { "name": "entity.name.tag.efficy support.function.efficy" }
+      },
+      "end": "(?=[%)\\|])|(?<=\\))",
+      "patterns": [
+        { "include": "#tag-args" }
+      ]
+    },
+    "tag-args": {
+      "patterns": [
+        { "include": "#arg-operator" },
+        { "include": "#arg-name" },
+        { "include": "#string-pipe" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "arg-name": {
+      "match": "([A-Za-z_][A-Za-z0-9_]*)\\s*(?=(?:%=|@=|=))",
+      "captures": {
+        "1": { "name": "entity.other.attribute-name.efficy" }
+      }
+    },
+    "arg-operator": {
+      "match": "(%=|@=|=)",
+      "name": "keyword.operator.assignment.efficy"
+    },
+    "string-pipe": {
+      "name": "string.quoted.other.pipe.efficy",
+      "begin": "\\|",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.efficy" }
+      },
+      "end": "\\|",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.efficy" }
+      },
+      "patterns": [
+        { "include": "#efficy-tag-close" },
+        { "include": "#efficy-tag-open" },
+        { "include": "#efficy-inner-tag" }
+      ]
+    },
+    "string-double": {
+      "name": "string.quoted.double.efficy",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "include": "#efficy-inner-tag" }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.efficy",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        { "include": "#efficy-inner-tag" }
+      ]
+    },
+    "number": {
+      "match": "\\b\\d+(?:\\.\\d+)?\\b",
+      "name": "constant.numeric.efficy"
+    },
+    "punctuation": {
+      "match": "[(),]",
+      "name": "punctuation.separator.efficy"
+    }
+  }
+}

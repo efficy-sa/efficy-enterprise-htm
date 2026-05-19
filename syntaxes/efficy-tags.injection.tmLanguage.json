@@ -1,0 +1,44 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Efficy Tags Injection",
+  "scopeName": "efficy.tags.injection",
+  "injectionSelector": "L:text.html.basic - (meta.tag.efficy | string)",
+  "patterns": [
+    { "include": "#efficy-tag-close" },
+    { "include": "#efficy-tag-open" }
+  ],
+  "repository": {
+    "efficy-tag-close": {
+      "name": "meta.tag.efficy.close.htm",
+      "begin": "(<%)(/)([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.efficy" },
+        "2": { "name": "punctuation.definition.tag.close.efficy" },
+        "3": { "name": "entity.name.tag.efficy" }
+      },
+      "end": "(%>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.efficy" }
+      }
+    },
+    "efficy-tag-open": {
+      "name": "meta.tag.efficy.htm",
+      "begin": "(<%)([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.efficy" },
+        "2": { "name": "entity.name.tag.efficy support.function.efficy" }
+      },
+      "end": "(%>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.efficy" }
+      },
+      "patterns": [
+        { "match": "([A-Za-z_][A-Za-z0-9_]*)\\s*(?=(?:%=|@=|=))", "captures": { "1": { "name": "entity.other.attribute-name.efficy" } } },
+        { "match": "(%=|@=|=)", "name": "keyword.operator.assignment.efficy" },
+        { "begin": "\\|", "end": "\\|", "name": "string.quoted.other.pipe.efficy" },
+        { "begin": "\"", "end": "\"", "name": "string.quoted.double.efficy" },
+        { "begin": "'", "end": "'", "name": "string.quoted.single.efficy" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "GetLabel": {
+    "prefix": "eff-getlabel",
+    "body": "<%GetLabel('${1:label text}')%>",
+    "description": "Translate a UI label in the current user session language."
+  },
+  "GetField": {
+    "prefix": "eff-getfield",
+    "body": "<%GetField('${1:fieldName}')%>",
+    "description": "Retrieve a database field value in the current entity context."
+  },
+  "GetArgument": {
+    "prefix": "eff-getargument",
+    "body": "<%GetArgument('${1:argName}')%>",
+    "description": "Read an argument from the current HTTP request."
+  },
+  "GetSetting": {
+    "prefix": "eff-getsetting",
+    "body": "<%GetSetting('${1:settingName}', module='${2:moduleName}')%>",
+    "description": "Read a setting value from a module."
+  },
+  "GetServerVariable": {
+    "prefix": "eff-getservervariable",
+    "body": "<%GetServerVariable('${1:VAR_NAME}')%>",
+    "description": "Read a server-level variable (e.g. X_EFFICY_APP)."
+  },
+  "If": {
+    "prefix": "eff-if",
+    "body": "<%If(\"${1:expression}\", value=\"${2:expected}\", then=\"${3:then}\", else=\"${4:else}\")%>",
+    "description": "Conditional tag — emits `then` if expression equals value, otherwise `else`."
+  },
+  "Switch": {
+    "prefix": "eff-switch",
+    "body": "<%Switch(\"${1:expression}\", ${2:case1}=|${3:value1}|, ${4:case2}=|${5:value2}|)%>",
+    "description": "Switch/case selection tag. Pipe delimiters allow nested tags in branch values."
+  },
+  "OnArgument": {
+    "prefix": "eff-onargument",
+    "body": "<%OnArgument('${1:argName}', value='${2:expected}', then='${3:then}', else='${4:else}')%>",
+    "description": "Emit different content depending on an HTTP request argument."
+  },
+  "OnEntity": {
+    "prefix": "eff-onentity",
+    "body": "<%OnEntity(value='${1:Comp}', then='${2:then}', else='${3:else}')%>",
+    "description": "Emit different content depending on the current entity (Comp, Cont, Acti, etc.)."
+  },
+  "OnField": {
+    "prefix": "eff-onfield",
+    "body": "<%OnField('${1:fieldName}', value='${2:expected}', then='${3:then}', else='${4:else}')%>",
+    "description": "Emit different content depending on a database field value."
+  },
+  "Macro": {
+    "prefix": "eff-macro",
+    "body": "<%Macro('${1:macroName}')%>",
+    "description": "Include the contents of a single macro."
+  },
+  "Macros": {
+    "prefix": "eff-macros",
+    "body": "<%Macros('${1:macro1};${2:macro2}')%>",
+    "description": "Include the contents of multiple macros (semicolon-separated)."
+  },
+  "LoadMacros": {
+    "prefix": "eff-loadmacros",
+    "body": "<%LoadMacros(\"${1:Library1;Library2}\")%>",
+    "description": "Load one or more macro libraries (semicolon-separated)."
+  },
+  "IncludeFile": {
+    "prefix": "eff-includefile",
+    "body": "<%IncludeFile('${1:relative/path.htm}')%>",
+    "description": "Include the contents of another file at this position."
+  },
+  "RunScript": {
+    "prefix": "eff-runscript",
+    "body": "<%RunScript(module='${1:moduleName}', func='${2:functionName}')%>",
+    "description": "Execute a server-side script function."
+  },
+  "LoadServerJs": {
+    "prefix": "eff-loadserverjs",
+    "body": "<%LoadServerJs('${1:moduleName}')%>",
+    "description": "Load a ServerJS module so its functions become available to RunScript."
+  },
+  "UseScript": {
+    "prefix": "eff-usescript",
+    "body": "<%UseScript('${1:script.js}')%>",
+    "description": "Register a client-side JavaScript file for the page."
+  },
+  "UseStyleSheet": {
+    "prefix": "eff-usestylesheet",
+    "body": "<%UseStyleSheet('${1:style.css}')%>",
+    "description": "Register a CSS stylesheet for the page."
+  },
+  "UseEditForm": {
+    "prefix": "eff-useeditform",
+    "body": "<%UseEditForm('${1:formName}')%>",
+    "description": "Bind the page to an edit form definition."
+  },
+  "GetDataGrid": {
+    "prefix": "eff-getdatagrid",
+    "body": "<%GetDataGrid(name='${1:gridName}')%>",
+    "description": "Generate a data grid (table) from a configured dataset."
+  },
+  "Navigate": {
+    "prefix": "eff-navigate",
+    "body": "<%Navigate('${1:targetPage}')%>",
+    "description": "Navigate the client to another page/URL."
+  },
+  "SetBookmark": {
+    "prefix": "eff-setbookmark",
+    "body": "<%SetBookmark('${1:bookmarkName}')%>",
+    "description": "Set a bookmark/context marker used by other tags."
+  },
+  "Inner evaluation %%": {
+    "prefix": "eff-inner",
+    "body": "%%${1:TagName}(${2})",
+    "description": "Inner tag evaluation — used inside string arguments of an outer tag."
+  },
+  "Argument operator %= (evaluate)": {
+    "prefix": "eff-argeval",
+    "body": "${1:argName}%=\"${2:expression-with-tags}\"",
+    "description": "Force evaluation of an argument value before the parent tag (Efficy 11.1+)."
+  },
+  "Argument operator @= (get request arg)": {
+    "prefix": "eff-argreq",
+    "body": "${1:argName}@=\"${2:requestArgName}\"",
+    "description": "Bind an argument to a request argument value (Efficy 11.1+)."
+  }
+}

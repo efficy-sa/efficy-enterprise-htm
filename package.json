@@ -1,0 +1,88 @@
+{
+  "name": "efficy-enterprise-htm",
+  "displayName": "Efficy Enterprise HTM",
+  "description": "Editor support for Efficy CRM HTM pages: syntax highlighting, snippets, and tag-name completion for the Efficy server-side tag language.",
+  "version": "0.1.0",
+  "publisher": "efficy",
+  "repository": {
+    "type": "git",
+    "url": "https://git.efficy.com/efficy/htm-plugin.git"
+  },
+  "license": "UNLICENSED",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:efficy-enterprise-htm"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "efficy-enterprise-htm",
+        "aliases": [
+          "Efficy Enterprise HTM",
+          "efficy-htm"
+        ],
+        "extensions": [],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "efficy-enterprise-htm",
+        "scopeName": "text.html.efficy-enterprise-htm",
+        "path": "./syntaxes/efficy-enterprise-htm.tmLanguage.json",
+        "embeddedLanguages": {
+          "source.js": "javascript",
+          "source.css": "css",
+          "text.html.basic": "html"
+        }
+      },
+      {
+        "scopeName": "efficy.tags.injection",
+        "path": "./syntaxes/efficy-tags.injection.tmLanguage.json",
+        "injectTo": [
+          "text.html.efficy-enterprise-htm",
+          "text.html.basic"
+        ]
+      }
+    ],
+    "snippets": [
+      {
+        "language": "efficy-enterprise-htm",
+        "path": "./snippets/efficy-enterprise-htm.code-snippets"
+      }
+    ],
+    "configuration": {
+      "title": "Efficy Enterprise HTM",
+      "properties": {
+        "efficyEnterpriseHtm.tagReferencePath": {
+          "type": "string",
+          "default": "c:\\Data\\Application\\App\\Documentation",
+          "description": "Folder containing the TagReference*.ini files (UTF-16 LE). If unset or unreadable, the extension still provides grammar and snippets."
+        },
+        "efficyEnterpriseHtm.activateOnHtmlWithTags": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically switch .htm files to the Efficy language when they contain '<%' in the first ~4 KB. Disable to opt in only via files.associations."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package --no-git-tag-version --no-update-package-json --allow-missing-repository --out ./efficy-enterprise-htm.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.4.0"
+  }
+}
