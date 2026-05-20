@@ -36,8 +36,10 @@ If the `TagReference*.ini` files are not reachable, the extension still loads gr
 If you prefer explicit opt-in rather than auto-detection, add to your workspace `settings.json`:
 
 ```json
-"files.associations": {
-  "**/WebClient/**/*.htm": "efficy-enterprise-htm"
+{
+  "files.associations": {
+    "**/WebClient/**/*.htm": "efficy-enterprise-htm"
+  }
 }
 ```
 
